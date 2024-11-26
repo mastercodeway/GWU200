@@ -1,0 +1,110 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a asp-controller="Home" asp-action="Index" class="logo"><img class="pixel-critic-logo" src="~/Images/logo-no-background.png" alt="Logo"></a>
+
+        
+     
+        <div class="auth-buttons">
+            @if (User.Identity?.IsAuthenticated != true)
+            {
+                <div class="menu-group">
+                    <div class="menu">
+                        <button>Menu</button>
+                        <div class="menu-content">
+                            <a class="visible-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <div class="submenu">
+                                <a class="visible-link">Categories</a>
+                                <div class="submenu-content">
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Card Game" })">Card Game</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "MMORPG" })">MMORPG</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "MOBA" })">Moba</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Shooter" })">Shooter</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Strategy" })">Strategy</a>
+                                </div>
+                            </div>
+                            <a class="visible-link" asp-controller="News" asp-action="Index">News</a>
+                            <a class="hidden-link" asp-controller="User" asp-action="Index">Login</a>
+                            <a class="hidden-link" asp-controller="User" asp-action="Register">Register</a>
+
+                        </div>
+                    </div>
+                </div>
+                <a class="outer-button-container" asp-controller="User" asp-action="Index"><div class="inner-button-container">Login</div></a>
+                <a class="outer-button-container" asp-controller="User" asp-action="Register"><div class="inner-button-container">Register</div></a>
+            }
+            else
+            {
+                <div class="menu-group">
+                    <div class="menu">
+                        <button>Menu</button>
+                        <div class="menu-content">
+                            <a class="visible-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <div class="submenu">
+                                <a class="visible-link">Categories</a>
+                                <div class="submenu-content">
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Card Game" })">Card Game</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "MMORPG" })">MMORPG</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "MOBA" })">Moba</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Shooter" })">Shooter</a>
+                                    <a class="visible-link" href="@Url.Action("Category", "Game", new { category = "Strategy" })">Strategy</a>
+                                </div>
+                            </div>
+                            <a class="visible-link" asp-controller="News" asp-action="Index">News</a>
+                            <a class="hidden-link" asp-controller="User" asp-action="Index">Login</a>
+                            <a class="hidden-link" asp-controller="User" asp-action="Register">Register</a>
+
+                        </div>
+                    </div>
+                </div>
+                <form class="logout-form" asp-controller="User" asp-action="Logout" method="post">
+
+                    <div class="outer-button-container"><button class="inner-button-container" type="submit">Logout</button></div>
+                </form>
+                <a asp-controller="User" asp-action="UserProfile"> 
+
+                <div class="nav-profile-icon">
+                    <img src="/Images/Leonardo_Phoenix_Create_a_dark_futuristic_cityscape_at_dusk_ba_3.jpg"/>
+                </div>
+                </a>
+                
+            }
+        </div>
+    </nav>
+    <div class="wrapper">
+        @RenderBody()
+    </div>
+
+    <!--Footer------------------------------------------------------------------->
+    <footer>
+        <figure class="footerLogo">
+           <a asp-controller="Home" asp-action="Index"> <img src="~/Images/logo-no-background.png" alt=""> </a>
+        </figure>
+        <div class="footerTitle">
+            <h2>Follow us at:</h2>
+        </div>
+        <div class="iconContainer">
+            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+
+    </footer>
+
+
+    <script src="https://kit.fontawesome.com/ace3d3e15b.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

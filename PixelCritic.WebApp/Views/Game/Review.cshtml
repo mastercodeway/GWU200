@@ -1,0 +1,21 @@
+﻿@using PixelCritic.WebApp.Dtos; 
+@model UserReviewDto; 
+<div class="main-container">
+<section class="review-article-container">
+    <h2>@Model.User.Username</h2>
+    <div class="review-article-img-container">
+        <img src="~/Images/warrior-7631678_1280.jpg" alt="">
+    </div>
+    <article class="review-article-content">
+        <h2 class="review-article-title">@Model.Review.Titel</h2>
+        <p>
+            @Model.Review.Description
+        </p>
+    </article>
+    <div class="review-article-score">
+        <h2>score</h2>
+        <div>@Model.Review.Score</div>
+    </div>
+    <p class="review-article-date">@Model.Review.Posted</p>
+</section>
+</div>

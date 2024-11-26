@@ -1,0 +1,57 @@
+﻿<div class="outer-user-profile-container">
+
+<div class="review-modal" id="modal-delete">
+    <div class="modal-content">
+
+            <form class="modal-form" asp-controller="User" asp-action="DeleteProfile" method="post">
+            <h1>Delete your profile</h1>
+            <p>write password to confirm delete</p>
+            <input type="text" name="password" class="modal-review-title" placeholder="Password" />
+                <input type="text" name="confirmPassword" class="modal-review-title" placeholder="Confirm password" />
+            <div class="modal-button-container">
+                <button class="outer-button-container" type="submit">Delete</button>
+                <button class="modal-cancel-btn" id="cancel-delete" type="button">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div class="review-modal" id="modal-change-password">
+    <div class="modal-content">
+        
+            <form class="modal-form" asp-controller="User" asp-action="ChangePassword" method="post">
+            <h1>Change password</h1>
+            <p>Write new password</p>
+            <input type="text" name="newPassword" class="modal-review-title" placeholder=" New password" />
+            <p>Write old password to confirm change</p>
+            <input type="text"name="oldPassword" class="modal-review-title" placeholder=" Old password" />
+            <div class="modal-button-container">
+                <button type="submit">Change password</button>
+                <button id="cancel-change-password" class="modal-cancel-btn" type="button">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<div class="user-profile-container">
+    <div class="profile-picture">
+        <img class="user-profile-img" src="/Images/Leonardo_Phoenix_Create_a_dark_futuristic_cityscape_at_dusk_ba_3.jpg" alt="">
+    </div>
+    <div class="user-info">
+        <h2>namn</h2>
+        <h2>E-post</h2>
+        <h2>
+            number of review made
+        </h2>
+    </div>
+    <div>
+
+        <button class="change-password">Change password</button>
+        <button class="delete-password">Delete account</button>
+    </div>
+</div>
+</div>
+<script src="~/js/UserModal.js"></script>

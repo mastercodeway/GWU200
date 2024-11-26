@@ -1,0 +1,80 @@
+﻿@using PixelCritic.WebApp.ViewModels
+
+@model List<NewsVM>;
+<div class="main-container ">
+
+
+<section class="header-news">
+    <h1 class="news-header-title">Most viewed news</h1>
+    @for (var i = 0; i < 3; i++)
+    {
+        if (i == 0)
+        {
+            <figure class="header-news-img-container">
+                <img src="@Model[i].ImageUrl" alt="">
+            </figure>
+            <div class="header-newscontainer-left">
+                <div class="dynamic-card-content">
+                    <h3 class="news-card-title">@Model[i].Title</h3>
+                    <p class="news-card-description">@Model[i].Description</p>
+                    <p class="news-card-date">@Model[i].Date</p>
+                </div>
+            </div>
+        }
+        else if (i == 1)
+        {
+
+
+
+            <div class="header-newscontainer-top-right">
+                <figure class="header-news-img">
+                    <img src="@Model[i].ImageUrl" alt="">
+                </figure>
+                <div class="dynamic-card-content">
+                    <h3 class="news-card-title">@Model[i].Title</h3>
+                    <p class="news-card-description">@Model[i].Description</p>
+                    <p class="news-card-date">@Model[i].Date</p>
+                </div>
+            </div>
+
+        }
+        else
+        {
+
+
+            <div class="header-newscontainer-bottom-right">
+                <figure class="header-news-img">
+                    <img src="@Model[i].ImageUrl" alt="">
+                </figure>
+                <div class="dynamic-card-content">
+                    <h3 class="news-card-title">@Model[i].Title</h3>
+                    <p class="news-card-description">@Model[i].Description</p>
+                    <p class="news-card-date">@Model[i].Date</p>
+                </div>
+            </div>
+        }
+    }
+
+
+</section>
+<section class="dynamic-news-section">
+    <h1 class="news-header-title">Most viewed news</h1>
+    @foreach (var news in Model.OrderByDescending(n => n.Date))
+    {
+        <a href="@Url.Action("ArticleDetails", "News", new { id = news.Id })">
+            <div class="outer-dynamic-container">
+                <div class="dynamic-newscard">
+                    <div class="dynamic-card-content">
+                        <h3 class="news-card-title">@news.Title</h3>
+                        <p class="news-card-description">@news.Description</p>
+                        <p class="news-card-date">@news.Date</p>
+                    </div>
+                    <div class="news-card-image">
+                        <img src="@news.ImageUrl" alt="News Image">
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</section>
+</div>

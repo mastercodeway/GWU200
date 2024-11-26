@@ -1,0 +1,152 @@
+﻿@using PixelCritic.WebApp.Dtos
+@using PixelCritic.WebApp.ViewModels
+
+@model GameVM
+<div class="main-container">
+<section class="game-header">
+    <div class="game-header-img">
+        <img src="@Model.GameReviews.Thumbnail" alt="">
+    </div>
+    <div class="game-header-outer-info">
+
+
+        <div class="game-header-info">
+            <h1 class="game-header-title">@Model.GameReviews.Title</h1>
+            <h2 class="game-header-platform">Plattform: @Model.GameReviews.Platform</h2>
+            <h2 class="game-header-genre">Genre: @Model.GameReviews.Genre</h2>
+            <h2 class="game-header-developer">Developer: @Model.GameReviews.Developer</h2>
+            <h2 class="game-header-release">Release date: @Model.GameReviews.ReleaseDate</h2>
+
+            <div class="review-score-container">
+                <h2>Review score</h2>
+                <div class="review-score">@Model.GameReviews.Rating</div>
+            </div>
+            <div class="review-critics">
+                <h2>Reviews based on</h2>
+                <div class="review-score">@Model.GameReviews.NumOfReviews</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="game-header-description">
+        <h1>Description</h1>
+        <p>
+            @Model.GameReviews.ShortDescription
+        </p>
+    </div>
+    <div class="game-header-add-review">
+        <h2>Wanna add a review?</h2>
+        @if (User.Identity.IsAuthenticated)
+        {
+
+                <div class="outer-button-container">
+                    <button id="add-review" class="inner-button-container">Add review</button>
+
+            </div>
+        }
+        else
+        {
+            <a asp-controller="User" asp-action="Index">Sign in to make a review</a>
+        }
+    </div>
+</section>
+
+<div class="review-modal">
+    <div class="modal-content">
+        <form class="modal-form" asp-controller="Game" asp-action="AddReview" method="post">
+            <input asp-for="NewReview.GameId" type="hidden" />
+            <input asp-for="NewReview.UserRefId" type="hidden" />
+            <input type="text" asp-for="NewReview.Score" class="modal-hidden-input">
+            <h1 class="show-score">score</h1>
+            <div class="score-bar">
+
+                <div class="score-item" data-score="1"></div>
+                <div class="score-item" data-score="2"></div>
+                <div class="score-item" data-score="3"></div>
+                <div class="score-item" data-score="4"></div>
+                <div class="score-item" data-score="5"></div>
+                <div class="score-item" data-score="6"></div>
+                <div class="score-item" data-score="7"></div>
+                <div class="score-item" data-score="8"></div>
+                <div class="score-item" data-score="9"></div>
+                <div class="score-item" data-score="10"></div>
+            </div>
+            <input asp-for="NewReview.Titel" type="text"  class="modal-review-title" placeholder="Add Titel" />
+            <textarea asp-for="NewReview.Description"  placeholder="Add content"  rows="20"></textarea>
+            <div class="modal-button-container">
+                <button type="submit">Add Review</button>
+                <button class="modal-cancel-btn" type="button">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="buttonContainer">
+    <h1>Most positive reviews</h1>
+</div>
+<section id="card-pop" class="cardHolder">
+        <div id="cardslider1" class="flex-slider">
+        @if (Model.GameReviews.Reviews.Count() == 0)
+        {
+            <div>
+
+                <h2>There are no reviews yet...</h2>
+                <br />
+                <p>Be the first to contribute a review for this game by pressing the add review button!</p>
+            </div>
+        }
+        @foreach (var review in Model.GameReviews.Reviews.OrderByDescending(r => r.Review.Score).Take(4))
+        {
+            <a href="@Url.Action("Review", "Game", new { id = review.Review.Id })">
+                <div class="review-card">
+                    <div class="review-card-header">
+                        <div class="review-score">@review.Review.Score</div>
+                        <h2 class="review-card-username">@review.User.Username</h2>
+                    </div>
+                    <div class="review-card-content">
+                        <h2 class="review-card-title">@review.Review.Titel</h2>
+                        <p>@review.Review.Description</p>
+                    </div>
+
+                    <p class="review-card-date">@review.Review.Posted</p>
+                </div>
+            </a>
+        }
+
+
+
+    </div>
+</section>
+
+
+<div class="buttonContainer">
+    <h1>All Reviews</h1>
+</div>
+<div class="dynamic-gameCard">
+    @if (Model.GameReviews.Reviews.Count() == 0)
+    {
+
+        <h2>No reviews yet...</h2>
+    }
+    @foreach (var review in Model.GameReviews.Reviews.OrderByDescending(r => r.Review.Posted))
+    {
+            <a href="@Url.Action("Review", "Game", new { id = review.Review.Id })">
+            <div class="review-card">
+                <div class="review-card-header">
+                    <div class="review-score">@review.Review.Score</div>
+                    <h2 class="review-card-username">@review.User.Username</h2>
+                </div>
+                <div class="review-card-content">
+                    <h2 class="review-card-title">@review.Review.Titel</h2>
+                    <p>@review.Review.Description</p>
+                </div>
+
+                <p class="review-card-date">@review.Review.Posted</p>
+            </div>
+        </a>
+    }
+
+</div>
+</div>
+<script src="~/js/Modal.js"></script>

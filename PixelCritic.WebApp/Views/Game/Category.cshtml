@@ -1,0 +1,101 @@
+﻿@using PixelCritic.WebApp.ViewModels;
+@model CategoryVm;
+<section class="heroHeader">
+    <div class="slidesContainer">
+        <div class="slidesItem">
+            <img class="slideImg" src="@Url.Content(Model.ImgUrl)"  alt="asd" />
+        </div>
+        <h1>@Model.Platform</h1>
+    </div>
+        
+</section>
+
+
+<div class="buttonContainer">
+    <h1>Most Relevant game</h1>
+</div>
+<section id="card-pop" class="cardHolder">
+    <div id="cardslider1" class="flex-slider">
+        
+        @foreach ((RatedGame game,string jsonGame) i in Model.Games
+            .OrderByDescending(g => g.Item1.NumOfReviews)
+            .Take(4))
+        {
+            <a href="@Url.Action("Game", "Game", new { gameData = i.jsonGame })">
+                <div class="gameCard">
+                    <div class="gameCardImgContainer">
+                        <img src="@i.game.Thumbnail" alt="" />
+                    </div>
+                    <div class="gameTitel">
+                        <h2>@i.game.Title</h2>
+                    </div>
+                    <h3 class="scoreTitel">Score:</h3>
+                    <h3 class="reviewMade">Based on @i.game.NumOfReviews critic review</h3>
+                    <div class="Score">
+                        <h2>@i.game.Rating</h2>
+                    </div>
+                </div>
+            </a>
+        }
+        
+        
+
+    </div>
+</section>
+
+<div class="buttonContainer">
+    <h1>Latest</h1>
+</div>
+<section id="card-pop" class="cardHolder">
+    <div id="cardslider1" class="flex-slider">
+
+        @foreach ((RatedGame game, string jsonGame) i in Model.Games
+        .OrderByDescending(g => g.Item1.ReleaseDate)
+        .Take(4))
+        {
+            <a href="@Url.Action("Game", "Game", new { gameData = i.jsonGame })">
+            <div class="gameCard">
+                <div class="gameCardImgContainer">
+                    <img src="@i.game.Thumbnail" alt="" />
+                </div>
+                <div class="gameTitel">
+                    <h2>@i.game.Title</h2>
+                </div>
+                <h3 class="scoreTitel">Score</h3>
+                <h3 class="reviewMade">Based on @i.game.NumOfReviews critic review</h3>
+                <div class="Score">
+                    <h2>@i.game.Rating</h2>
+                </div>
+            </div>
+        </a>
+       }
+
+    </div>
+</section>
+<div class="buttonContainer">
+    <h1>Highest rated games</h1>
+</div>
+<div class="dynamic-gameCard">
+    @foreach ((RatedGame game, string jsonGame) i in Model.Games
+    .OrderByDescending(g => g.Item1.Rating))
+    {
+        <a href="@Url.Action("Game", "Game", new { gameData = i.jsonGame })">
+            <div class="gameCard">
+                <div class="gameCardImgContainer">
+                    <img src="@i.game.Thumbnail" alt="" />
+                </div>
+                <div class="gameTitel">
+                    <h2>@i.game.Title</h2>
+                </div>
+                <h3 class="scoreTitel">Score</h3>
+                <h3 class="reviewMade">Based on @i.game.NumOfReviews critic review</h3>
+                <div class="Score">
+                    <h2>@i.game.Rating</h2>
+                </div>
+            </div>
+        </a>
+  
+    }
+   
+</div>
+   

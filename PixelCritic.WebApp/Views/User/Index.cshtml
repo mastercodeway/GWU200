@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+@model PixelCritic.WebApp.Dtos.UserLoginDto
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="loginContainer">
+        <div class="logo-holder">
+            <a asp-controller="Home" asp-action="Index">
+            <img src="~/Images/logo-no-background.png" alt="">
+            </a>
+        </div>
+        <div class="formContainer">
+
+            <h2 class="loginTitel">Sign in</h2>
+            <h4 class="loginTitel">@TempData["ErrorMessage"]</h4>
+            <form asp-controller="User" asp-action="Index" method="post">
+                <input asp-for="Username" type="text" placeholder="Username">
+                <input asp-for="Password" type="password" placeholder="Password">
+                <a asp-controller="User" asp-action="Register"><h4>Sign up?</h4></a>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    
+
+</body>
+</html>
